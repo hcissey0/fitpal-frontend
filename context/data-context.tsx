@@ -70,7 +70,7 @@ interface DataContextType {
     calories_burned: number,
     litres_consumed: number
   ) => Promise<void>;
-  refresh: (type: RefreshableDataType) => Promise<void>;
+  refresh: (type: RefreshableDataType, config?: {showErrorToast?: boolean, rethrowError?: boolean}) => Promise<void>;
   setGeneratePlanOpen: (isOpen: boolean) => void;
 }
 

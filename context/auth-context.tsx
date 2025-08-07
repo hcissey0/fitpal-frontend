@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         formData
       );
       persistAuth(res.data.token, res.data.user);
-      router.push("/u");
+      router.push("/");
     } catch (err) {
       handleApiError(err, "Signup Failed");
       throw err;
@@ -116,7 +116,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         { email, password }
       );
       persistAuth(res.data.token, res.data.user);
-      router.push("/u");
+      router.push("/");
     } catch (err) {
       // handleApiError(err, "Login Failed");
       throw err;
@@ -139,7 +139,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const res = await apiLoginWithGoogle(accessToken);
       console.log("Google Login Response:", res);
       persistAuth(res.token, res.user);
-      router.push('/u');
+      router.push('/');
 
     } catch (err) {
       handleApiError(err, "Google Login Failed")

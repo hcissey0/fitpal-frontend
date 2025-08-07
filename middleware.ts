@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
   // If the user has a token and tries to access a public auth page (like login),
   // redirect them to the main user dashboard.
   if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/u", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   // Allow the request to proceed if none of the above conditions are met.

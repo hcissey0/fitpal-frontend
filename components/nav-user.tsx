@@ -107,13 +107,13 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/u">
+                <Link href="/">
                   <LayoutDashboard className="mr-2 h-4 w-4" />
                   <span>Dashboard</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/u/profile">
+                <Link href="/profile">
                   <UserCog2 className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                 </Link>

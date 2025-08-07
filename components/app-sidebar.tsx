@@ -27,10 +27,10 @@ import {
 import { useData } from "@/context/data-context";
 
 const navItems = [
-  { name: "Dashboard", icon: LayoutDashboard, href: "/u" },
-  { name: "Plans", icon: PencilRulerIcon, href: "/u/plans" },
-  { name: "Progress", icon: ChartLine, href: "/u/progress" },
-  { name: "Profile & Settings", icon: UserCog2, href: "/u/profile" },
+  { name: "Dashboard", icon: LayoutDashboard, href: "/" },
+  { name: "Plans", icon: PencilRulerIcon, href: "/plans" },
+  { name: "Progress", icon: ChartLine, href: "/progress" },
+  { name: "Profile & Settings", icon: UserCog2, href: "/profile" },
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

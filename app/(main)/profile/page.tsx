@@ -23,7 +23,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { User, Settings, Activity, Save, Target, Loader2, Utensils, HeartPulseIcon, CheckCircle, Trash, UserCog2, Timer, Dumbbell } from "lucide-react";
+import { Settings, Activity, Save, Target, Loader2, Utensils, HeartPulseIcon, CheckCircle, Trash, UserCog2, Timer, Dumbbell } from "lucide-react";
 import { toast } from "sonner";
 import { updateProfile, updateUser } from "@/lib/api-service";
 import { Profile, User as UserInterface } from "@/interfaces";
@@ -34,7 +34,9 @@ import { handleApiError } from "@/lib/error-handler";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import _ from 'lodash';
-
+import { OnboardingDialog } from "@/components/onboarding-dialog";
+import { User } from "@/interfaces";
+import { useData } from "@/context/data-context";
 
 interface Step {
   id: number;
@@ -44,7 +46,7 @@ interface Step {
 
 
 const steps: Step[] = [
-  { id: 1, title: "Personal Information", icon: User },
+  { id: 1, title: "Personal Information", icon: UserCog2 },
   { id: 2, title: "Activity Level", icon: Activity },
   { id: 3, title: "Fitness Goal", icon: Target },
   { id: 4, title: "Dietary Preferences", icon: Utensils },
@@ -63,8 +65,9 @@ export default function ProfilePage() {
   const [ confirmDeleteEmail, setConfirmDeleteEmail] = useState('');
   const [userDetails, setUserDetails] = useState<Partial<UserDetails>>({});
   const [profileData, setProfileData] = useState<Partial<Profile>>({});
-
+  const [onboardingOpen, setOnboardingOpen] = useState(false);
   const originalProfileData = useMemo(() => user?.profile, [user])
+  const { refresh } = useData();
 
   useEffect(() => {
     if (user) {
@@ -77,6 +80,8 @@ export default function ProfilePage() {
       if (user.profile) {
         console.log(user)
         setProfileData(user.profile);
+      } else {
+        setOnboardingOpen(true);
       }
     }
   }, [user]);
@@ -239,7 +244,7 @@ export default function ProfilePage() {
           <Card className="glass">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5 text-primary" /> Fitness Profile
+                <UserCog2 className="h-5 w-5 text-primary" /> Fitness Profile
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -781,6 +786,19 @@ export default function ProfilePage() {
           {isLoading ? "Saving..." : "Save Changes"}
         </Button>
       </div>
+
+      <OnboardingDialog
+              open={onboardingOpen}
+              onClose={() => setOnboardingOpen(false)}
+              onComplete={() => {
+                setOnboardingOpen(false);
+                refreshUser().then((updatedUser: User | null) => {
+                  if (updatedUser?.profile) {
+                    refresh("all-data", { showErrorToast: false });
+                  }
+                });
+              }}
+            />
     </div>
   );
 }
