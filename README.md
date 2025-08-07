@@ -116,7 +116,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000/api
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/hcissey0/fitpal-frontend.git
    cd fitpal-frontend
    ```
 
