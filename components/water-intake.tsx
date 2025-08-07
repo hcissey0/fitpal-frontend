@@ -34,8 +34,7 @@ export function WaterIntake() {
               "track",
               "water",
               todayNutrition.id,
-              undefined,
-              undefined,
+              0,0,0,
               0.25
             )
           }
