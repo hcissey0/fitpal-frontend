@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Play, X } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { beep } from "@/lib/utils"; // ✅ Import our beep function
+import { beep } from "@/lib/utils"; 
 import { Exercise } from "@/interfaces";
 import { useData } from "@/context/data-context";
 import { handleApiError } from "@/lib/error-handler";
@@ -62,7 +62,7 @@ function TimerToastContent({
       .padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`;
 
   return (
-    <div className="p-4 flex items-center justify-between w-full">
+    <div className="p-4 flex items-center justify-between w-full gap-5">
       <div>
         <div className="font-semibold text-sm mb-1 text-foreground">
           {exerciseName} {type === 'rest' ? 'Rest' : 'Exercise'} Timer

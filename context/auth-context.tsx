@@ -104,7 +104,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       router.push("/");
     } catch (err) {
       handleApiError(err, "Signup Failed");
-      throw err;
     }
   };
 
@@ -129,7 +128,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await logout();
     } catch (e) {
       handleApiError(e, "Failed to delete Account");
-      throw e;
     }
   }
 
@@ -143,7 +141,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     } catch (err) {
       handleApiError(err, "Google Login Failed")
-      throw err
     }
   }
 
