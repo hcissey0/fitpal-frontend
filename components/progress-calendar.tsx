@@ -85,7 +85,7 @@ export function ProgressCalendar({
   );
 
   return (
-    <div className={cn("glass rounded-xl max- p-3", className)}>
+    <div className={cn("glass rounded-xl p-3", className)}>
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center justify-between text-lg text-foreground">
           <div className="flex items-center gap-2">

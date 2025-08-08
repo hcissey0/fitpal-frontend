@@ -35,15 +35,7 @@ export default function WeeklyWorkoutCompletion({
     className?: string
 }) {
   const { weeklyProgress } = useData();
-  const charrtData = [
-    { day: "Mon", completion_rate: 95, is_rest_day: false },
-    { day: "Tue", completion_rate: 88, is_rest_day: false },
-    { day: "Wed", completion_rate: 92, is_rest_day: false },
-    { day: "Thu", completion_rate: 0, is_rest_day: true },
-    { day: "Fri", completion_rate: 85, is_rest_day: false },
-    { day: "Sat", completion_rate: 78, is_rest_day: false },
-    { day: "Sun", completion_rate: 0, is_rest_day: true },
-  ];
+
 
   const chartData = useMemo(() => {
     return weeklyProgress.map((wp)=> {

@@ -45,6 +45,7 @@ import { handleApiError } from "@/lib/error-handler";
 import { useAuth } from "@/context/auth-context";
 import { Separator } from "./ui/separator";
 import { Switch } from "./ui/switch";
+import { requestNotificationPermissionAndSubscribe, unsubscribeFromPushNotifications } from "@/lib/utils";
 
 interface OnboardingDialogProps {
   open: boolean;
@@ -108,6 +109,8 @@ export function OnboardingDialog({
         return false;
     }
   };
+
+
 
   const handleFinish = async () => {
     setIsLoading(true);
@@ -527,6 +530,8 @@ const Step5 = ({ step, formData, updateFormData }: StepProps) => (
   </div>
 );
 
+
+
 const Step6 = ({ step, formData, updateFormData }: StepProps) => (
   <div className="space-y-8">
     <div className="flex items-center gap-2">
@@ -582,14 +587,26 @@ const Step6 = ({ step, formData, updateFormData }: StepProps) => (
       <Label className="flex flex-col items-start">
         <div className="font-semibold">Enable Notifications</div>
         <div className="text-xs text-muted-foreground">
-          Allow Google Calender to send notificaitons when connected.
+          Allow app to send you notifications.
         </div>
       </Label>
       <Switch
         checked={formData.notification_reminders_enabled}
-        onCheckedChange={(checked) =>
-          updateFormData("notification_reminders_enabled", checked)
-        }
+        onCheckedChange={async (checked) => {
+          if (checked) {
+            const success = await requestNotificationPermissionAndSubscribe();
+            if (!success) {
+              toast.error("Failed to enable notifications", {
+                description:
+                  "Please check your browser settings and try again.",
+              });
+              return;
+            }
+          } else {
+            await unsubscribeFromPushNotifications();
+          }
+          updateFormData("notification_reminders_enabled", checked);
+        }}
       />
     </div>
     <div className="flex items-center justify-between gap-4">
@@ -614,16 +631,17 @@ const Step6 = ({ step, formData, updateFormData }: StepProps) => (
         </div>
       </Label>
       <Input
-      disabled={!formData.email_reminders_enabled}
-      className="glass max-w-20"
-      type="number"
-      min={1}
-      step={1}
-      value={formData.minutes_before_email_reminder}
-      defaultValue={30}
-      onChange={(e)=> updateFormData('minutes_before_email_reminder', e.target.value)}
+        disabled={!formData.email_reminders_enabled}
+        className="glass max-w-20"
+        type="number"
+        min={1}
+        step={1}
+        value={formData.minutes_before_email_reminder}
+        defaultValue={30}
+        onChange={(e) =>
+          updateFormData("minutes_before_email_reminder", e.target.value)
+        }
       />
-      
     </div>
   </div>
 );

@@ -631,10 +631,10 @@ export default function PlanPage() {
         <Tabs defaultValue="nutrition" className="w-full">
           <TabsList className="gri w-full grid-cols-2 glass">
             <TabsTrigger value="nutrition" className="flex items-center gap-2">
-              <Utensils /> Nutrition
+              <Utensils className="text-primary"/> Nutrition
             </TabsTrigger>
             <TabsTrigger value="workout" className="flex items-center gap-2">
-              <Dumbbell /> Workout
+              <Dumbbell className="text-accent"/> Workout
             </TabsTrigger>
           </TabsList>
           <TabsContent value="nutrition" className="mt-6">

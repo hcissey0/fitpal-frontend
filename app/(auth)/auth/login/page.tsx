@@ -113,9 +113,9 @@ export default function LoginPage() {
           <div className="grid gap-3">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
-              <a href="#" className="ml-auto text-sm">
+              {/* <a href="#" className="ml-auto text-sm">
                 Forgot your password?
-              </a>
+              </a> */}
             </div>
             <Input
               className="glass-card"

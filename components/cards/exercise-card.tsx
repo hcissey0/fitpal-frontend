@@ -95,12 +95,14 @@ export function ExerciseCard({
               exercise={exercise}
               
               />
+              {!settings.startRestTimerAfterExercise && 
             <ExerciseTimer
             type="rest"
             
-              exercise={exercise}
-              
-              />
+            exercise={exercise}
+            
+            />
+          }
               </div>
           )}
           {settings.trackingEnabled && 

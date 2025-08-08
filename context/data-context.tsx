@@ -68,7 +68,8 @@ interface DataContextType {
     trackingId: number,
     sets: number,
     calories_burned: number,
-    litres_consumed: number
+    litres_consumed: number,
+    config?: {showErrorToast?: boolean, rethrowError?: boolean},
   ) => Promise<void>;
   refresh: (type: RefreshableDataType, config?: {showErrorToast?: boolean, rethrowError?: boolean}) => Promise<void>;
   setGeneratePlanOpen: (isOpen: boolean) => void;
@@ -301,7 +302,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     trackingId: number,
     sets: number,
     calories_burned: number,
-    litres_consumed: number
+    litres_consumed: number,
+    config: {showErrorToast?: boolean, rethrowError?: boolean} = {showErrorToast:true, rethrowError:true}
   ) => {
     try {
       if (!settings.trackingEnabled) throw new Error("Tracking disabled");
@@ -350,8 +352,10 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         refresh("daily-progress", { showErrorToast: false }),
       ]);
     } catch (error) {
-      handleApiError(error, `Failed to ${action} ${type}.`);
-      throw error;
+      if (config?.showErrorToast)
+        handleApiError(error, `Failed to ${action} ${type}.`);
+      if (config?.rethrowError)
+        throw error;
     }
   };
 

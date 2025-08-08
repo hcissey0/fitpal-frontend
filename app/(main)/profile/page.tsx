@@ -37,6 +37,7 @@ import _ from 'lodash';
 import { OnboardingDialog } from "@/components/onboarding-dialog";
 import { User } from "@/interfaces";
 import { useData } from "@/context/data-context";
+import { requestNotificationPermissionAndSubscribe, unsubscribeFromPushNotifications } from "@/lib/utils";
 
 interface Step {
   id: number;
@@ -89,6 +90,24 @@ export default function ProfilePage() {
   const handleProfileChange = (field: keyof Profile, value: any) => {
     setProfileData((prev) => ({ ...prev, [field]: value }));
   };
+
+  const handleNotificationToggle = async (checked: boolean) => {
+    if (checked) {
+      const success = await requestNotificationPermissionAndSubscribe();
+      if (!success) {
+        toast.error("Failed to enable notifications",{
+          description: "Please check your browser settings."
+        });
+        return;
+      }
+      toast.success("Notifications enabled successfully.")
+    } else {
+      await unsubscribeFromPushNotifications();
+      toast.success("Notifications disabled");
+    }
+
+    handleProfileChange('notification_reminders_enabled', checked);
+  }
 
   const handleUserDetailsChange = (field: keyof UserDetails, value: string) => {
     setUserDetails((prev) => ({ ...prev, [field]: value }));
@@ -567,16 +586,14 @@ export default function ProfilePage() {
         </div>
         <div className="flex items-center justify-between gap-4 glass p-5 rounded-xl">
           <Label className="flex flex-col items-start">
-            <div className="font-semibold">Enable Calendar Notifications</div>
+            <div className="font-semibold">Enable Notifications</div>
             <div className="text-xs text-muted-foreground">
-              Allow Google Calendar to send notifications.
+              Allow app to send you notificaitons.
             </div>
           </Label>
           <Switch
             checked={profileData.notification_reminders_enabled}
-            onCheckedChange={(checked) =>
-              handleProfileChange("notification_reminders_enabled", checked)
-            }
+            onCheckedChange={handleNotificationToggle}
           />
         </div>
         <div className="flex items-center justify-between gap-4 glass p-5 rounded-xl">

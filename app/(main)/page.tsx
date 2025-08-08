@@ -16,6 +16,7 @@ import WeeklyWorkoutCompletion from "@/components/weekly-workout-completion";
 
 import { useState, useEffect } from "react";
 import { subscribeUser, unsubscribeUser, sendNotification } from "../actions";
+import { useNotificationScheduler } from "@/hooks/use-notification-scheduler";
 
 function urlBase64ToUint8Array(base64String: string) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -153,6 +154,7 @@ export default function Page() {
   const { user } = useAuth();
   const { activePlan, setGeneratePlanOpen } = useData();
 
+  const { scheduledNotificationsCount} = useNotificationScheduler();
   return (
     <>
       <div>
@@ -163,21 +165,25 @@ export default function Page() {
           </span>
           !
         </h1>
-        {/* <PushNotificationManager />
-        <InstallPrompt /> */}
+        {user?.profile?.notification_reminders_enabled &&
+          scheduledNotificationsCount > 0 && (
+            <div className="text-sm text-muted-foreground mt-2">
+              📱 {scheduledNotificationsCount} notifications scheduled for today
+            </div>
+          )}
       </div>
 
-      {activePlan ? (<>
-
-      <TodayStats />
-      <TodayWorkoutNutrition />
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
-          <ProgressCalendar className="sm:col-span-3 md:col-span-4" />
-          <CalorieTrackingRadial className="sm:col-span-2" />
-          <MacronutrientBreakdown className="sm:col-span-2" />
-          <WeeklyWorkoutCompletion className="sm:col-span-2 md:col-span-4 lg:col-span-4" />
-        </div>
-      </>
+      {activePlan ? (
+        <>
+          <TodayStats />
+          <TodayWorkoutNutrition />
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+            <ProgressCalendar className="sm:col-span-3 md:col-span-4" />
+            <CalorieTrackingRadial className="sm:col-span-2" />
+            <MacronutrientBreakdown className="sm:col-span-2" />
+            <WeeklyWorkoutCompletion className="sm:col-span-2 md:col-span-4 lg:col-span-4" />
+          </div>
+        </>
       ) : (
         <div className="text-center py-9 px-9 border border-dashed border-border rounded-lg mb-6">
           <Calendar className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />

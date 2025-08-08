@@ -1,7 +1,6 @@
 // lib/axios.ts
 import axios from "axios";
 import Cookies from "js-cookie";
-import { toast } from "sonner";
 
 // IMPORTANT: For client-side code, Next.js requires the prefix NEXT_PUBLIC_
 // Ensure this variable is set in your .env.local file

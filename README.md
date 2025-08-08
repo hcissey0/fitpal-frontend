@@ -123,6 +123,8 @@ NEXT_PUBLIC_API_URL=http://localhost:8000/api
 2. **Install dependencies:**
    ```bash
    npm install
+   npm install -g web-push
+   web-push generate-vapid-keys
    ```
 
 3. **Start development server:**

@@ -58,6 +58,7 @@ export const isBackendUp = async (): Promise<boolean> => {
     return response.status === 200;
   } catch (error) {
     return false;
+    error;
   }
 };
 

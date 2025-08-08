@@ -149,7 +149,9 @@ export function TodayWorkoutNutrition() {
       />
 
       {/* current workout */}
-      {currentSeconds >= timeToSeconds(settings.times.workout as string) ? (
+      {((currentSeconds >= timeToSeconds(settings.times.workout as string))
+      && (currentSeconds <= timeToSeconds(settings.times.workout as string) + 3600 * 3)  
+    ) ? (
         !todayWorkout.is_rest_day ? (
           <Card className="glas lg:col-span-4 border-none bg-transparent shadow-none">
             <CardHeader>

@@ -20,7 +20,7 @@ export default function ProgressPage() {
   const { progress } = useData();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 lg:min-w-100">
       <h1 className="text-4xl font-bold bg-clip-text bg-gradient-to-r from-pink-500 to-teal-500">Your Progress</h1>
       <div className="flex flex-col gap-4 ">
 
