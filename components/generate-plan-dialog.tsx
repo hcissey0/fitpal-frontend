@@ -234,7 +234,7 @@ export function GeneratePlanDialog({
             // Calendar when not loading
             <Calendar
               weekStartsOn={1}
-              disabled={disabledDates}
+              disabled={{ before: disabledDates[-1] || startOfWeek(new Date(), { weekStartsOn: 1 }) }}
               className="rounded-md bg-transparent"
               numberOfMonths={1}
               modifiers={{

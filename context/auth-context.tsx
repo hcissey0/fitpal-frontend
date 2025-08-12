@@ -135,7 +135,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const loginWithGoogle = async (accessToken: string) => {
     try {
       const res = await apiLoginWithGoogle(accessToken);
-      console.log("Google Login Response:", res);
       persistAuth(res.token, res.user);
       router.push('/');
 

@@ -8,7 +8,6 @@ import {
   Zap,
 } from "lucide-react";
 
-import { LoginForm } from "@/components/login-form";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,7 @@ import { handleApiError } from "@/lib/error-handler";
 import { useAuth } from "@/context/auth-context";
 import React from "react";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -168,9 +168,9 @@ export default function SignUpPage() {
       </Button>
       <div className="text-center text-sm">
         Already have an account?{" "}
-        <a href="/auth/login" className="">
+        <Link href={"/auth/login"}>
           Login
-        </a>
+        </Link>
       </div>
     </form>
   );

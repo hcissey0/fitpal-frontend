@@ -1,4 +1,4 @@
-// app/u/page.tsx
+// app/page.tsx
 "use client";
 import React from "react";
 import { Calendar } from "lucide-react";
@@ -7,10 +7,6 @@ import { useData } from "@/context/data-context";
 import { Button } from "@/components/ui/button";
 import { TodayStats } from "@/components/today-stats";
 import { TodayWorkoutNutrition } from "@/components/today-workout-nutrition";
-import { ProgressCalendar } from "@/components/progress-calendar";
-import CalorieTrackingRadial from "@/components/calorie-tracking-radial";
-import MacronutrientBreakdown from "@/components/macro-nutrient-breakdown";
-import WeeklyWorkoutCompletion from "@/components/weekly-workout-completion";
 import { useNotificationScheduler } from "@/hooks/use-notification-scheduler";
 
 
@@ -37,17 +33,13 @@ export default function Page() {
             </div>
           )}
       </div>
+      
 
       {activePlan ? (
         <>
           <TodayStats />
           <TodayWorkoutNutrition />
-          {/* <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
-            <ProgressCalendar className="sm:col-span-3 md:col-span-4" />
-            <CalorieTrackingRadial className="sm:col-span-2" />
-            <MacronutrientBreakdown className="sm:col-span-2" />
-            <WeeklyWorkoutCompletion className="sm:col-span-2 md:col-span-4 lg:col-span-4" />
-          </div> */}
+          
         </>
       ) : (
         <div className="text-center py-9 px-9 border border-dashed border-border rounded-lg mb-6">

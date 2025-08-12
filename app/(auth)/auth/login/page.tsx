@@ -9,7 +9,6 @@ import {
   Zap,
 } from "lucide-react";
 
-import { LoginForm } from "@/components/login-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -19,6 +18,7 @@ import { useAuth } from "@/context/auth-context";
 import React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 
 const GoogleLogo = ({className}: {className?:string}) => (
@@ -171,75 +171,11 @@ export default function LoginPage() {
         {/* --- Signup Link --- */}
         <div className="text-center text-sm">
           Don&apos;t have an account?{" "}
-          <a href="/auth/signup" className="">
+          <Link href={'/auth/signup'}>
             Sign up
-          </a>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
-//   return (
-//     <form onSubmit={handleSubmit}>
-
-//       <div className="glass p-6 rounded-xl space-y-4">
-
-//       <div className="grid gap-6">
-//         <div className="grid gap-6">
-//           <div className="grid gap-3">
-//             <Label htmlFor="email">Email</Label>
-//             <Input
-//               className="glass-card"
-//               id="email"
-//               type="email"
-//               placeholder="m@example.com"
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//               required
-//             />
-//           </div>
-//           <div className="grid gap-3">
-//             <div className="flex items-center">
-//               <Label htmlFor="password">Password</Label>
-//               <a
-//                 href="#"
-//                 className="ml-auto text-sm"
-//               >
-//                 Forgot your password?
-//               </a>
-//             </div>
-//             <Input
-//               className="glass-card"
-//               id="password"
-//               type="password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//               // placeholder="••••••••"
-//               required
-//               autoComplete={"off"}
-//             />
-//           </div>
-//           <Button
-//             type="submit"
-//             disabled={isLoading}
-//             // size={"lg"}
-//             className="cyber-butto text-foreground shadow-md w-full rounded-full font-semibold"
-//             onClick={handleSubmit}
-//           >
-//             <Loader2Icon className={`h-4 w-4 mr-1 ${isLoading ? "animate-spin" : "hidden"}`} />
-//             <Zap className={`h-4 w-4 mr-1 ${isLoading ? 'hidden': 'animate-ping'}`}  />
-//             {isLoading ? "Logging in..." : "Login"}
-//           </Button>
-//         </div>
-//         <div className="text-center text-sm">
-//           Don&apos;t have an account?{" "}
-//           <a href="/auth/signup" className="">
-//             Sign up
-//           </a>
-//         </div>
-//       </div>
-//       </div>
-//               </form>
-
-//   );
-// }

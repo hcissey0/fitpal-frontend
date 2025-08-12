@@ -157,7 +157,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         );
       }
     }
-  }, [isAuthenticated, user, refresh]);
+  }, [isAuthenticated, user]);
 
   const activePlan = useMemo(
     () => plans.find((p) => p.is_active) || null,
@@ -199,15 +199,17 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
 
   const { todayNutrition, todayWorkout } = useMemo(() => {
     if (!activePlan) return { todayNutrition: null, todayWorkout: null };
-    const dayOfWeek = new Date().getDay();
+
+    let dayOfWeek = new Date().getDay();
+    dayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
     const nutrition =
-      activePlan.nutrition_days.find((nd) => nd.day_of_week === dayOfWeek) ||
-      null;
+    activePlan.nutrition_days.find((nd) => nd.day_of_week === dayOfWeek) ||
+    null;
     const workout =
       activePlan.workout_days.find((wd) => wd.day_of_week === dayOfWeek) ||
       null;
     return { todayNutrition: nutrition, todayWorkout: workout };
-  }, [activePlan]);
+  }, [activePlan, plans]);
 
   const todayStats: DayStats | null = useMemo(() => {
     if (!todayNutrition && !todayWorkout) return null;

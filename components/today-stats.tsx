@@ -3,6 +3,7 @@ import { useData } from "@/context/data-context";
 import { Dumbbell, Utensils, Droplets, Flame } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 import PlanToCalendar from "./plan-to-calendar";
+import { useEffect } from "react";
 
 const statCards = [
   {
@@ -37,7 +38,7 @@ const statCards = [
 ];
 
 export function TodayStats() {
-  const { todayStats, activePlan } = useData();
+  const { todayStats, activePlan, todayNutrition, todayWorkout,settings } = useData();
 
   if (!todayStats || !activePlan) return null;
 

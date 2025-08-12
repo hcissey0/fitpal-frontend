@@ -119,25 +119,6 @@ export function TodayWorkoutNutrition() {
                 );
               });
           })()}
-
-          {/* {todayNutrition.meals.map((meal) => {
-            const trackedItem = mealTracking.find((t) => t.meal === meal.id);
-            return (
-              <MealCard
-                key={meal.id}
-                meal={meal}
-                isTracked={!!trackedItem}
-                onTrack={() =>
-                  track(
-                    trackedItem ? "untrack" : "track",
-                    "meal",
-                    meal.id,
-                    trackedItem?.id
-                  )
-                }
-              />
-            );
-          })} */}
         </CardContent>
       </Card>
 
@@ -149,9 +130,9 @@ export function TodayWorkoutNutrition() {
       />
 
       {/* current workout */}
-      {((currentSeconds >= timeToSeconds(settings.times.workout as string))
-      && (currentSeconds <= timeToSeconds(settings.times.workout as string) + 3600 * 3)  
-    ) ? (
+      {currentSeconds >= timeToSeconds(settings.times.workout as string) &&
+      currentSeconds <=
+        timeToSeconds(settings.times.workout as string) + 3600 * 3 ? (
         !todayWorkout.is_rest_day ? (
           <Card className="glas lg:col-span-4 border-none bg-transparent shadow-none">
             <CardHeader>
@@ -181,12 +162,19 @@ export function TodayWorkoutNutrition() {
             </CardContent>
           </Card>
         ) : (
-          <Card className="glass lg:col-span-4 text-center p-8 flex flex-col items-center justify-center">
-            <Trophy className="w-16 h-16 text-yellow-500 mb-4" />
-            <h3 className="text-xl font-bold">Rest Day</h3>
-            <p className="text-muted-foreground">
-              Time to recover and grow stronger.
-            </p>
+          <Card className="glas bg-transparent border-none shadow-none lg:col-span-4">
+            <CardHeader>
+              <CardTitle className="text-xl">Today's Workout</CardTitle>
+              <CardDescription>{todayWorkout.description}</CardDescription>
+              <Progress value={100} className="h-2" />
+            </CardHeader>
+            <CardContent className="  p-8 flex flex-col items-center justify-center">
+              <Trophy className="w-16 h-16 text-yellow-500 mb-4" />
+              <h3 className="text-xl font-bold">Rest Day</h3>
+              <p className="text-muted-foreground">
+                Time to recover and grow stronger.
+              </p>
+            </CardContent>
           </Card>
         )
       ) : null}
