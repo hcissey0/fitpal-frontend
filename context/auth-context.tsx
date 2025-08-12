@@ -128,6 +128,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await logout();
     } catch (e) {
       handleApiError(e, "Failed to delete Account");
+      throw e;
     }
   }
 

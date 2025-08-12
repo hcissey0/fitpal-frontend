@@ -546,6 +546,7 @@ const Step6 = ({ step, formData, updateFormData }: StepProps) => (
         </div>
       </Label>
       <Switch
+      defaultChecked={true}
         checked={formData.tracking_enabled}
         onCheckedChange={(checked) =>
           updateFormData("tracking_enabled", checked)
@@ -560,6 +561,7 @@ const Step6 = ({ step, formData, updateFormData }: StepProps) => (
         </div>
       </Label>
       <Switch
+        defaultChecked={true}
         disabled={!formData.tracking_enabled}
         checked={formData.track_after_rest_timer}
         onCheckedChange={(checked) =>
@@ -575,6 +577,7 @@ const Step6 = ({ step, formData, updateFormData }: StepProps) => (
         </div>
       </Label>
       <Switch
+        defaultChecked={true}
         disabled={!formData.tracking_enabled}
         checked={formData.start_rest_timer_after_exercise}
         onCheckedChange={(checked) =>
@@ -591,6 +594,7 @@ const Step6 = ({ step, formData, updateFormData }: StepProps) => (
         </div>
       </Label>
       <Switch
+        defaultChecked={true}
         checked={formData.notification_reminders_enabled}
         onCheckedChange={async (checked) => {
           if (checked) {

@@ -114,7 +114,7 @@ function PlanSelector({
         ))}
       </div>
       {selectedPlan && (
-        <div className="flex justify-around">
+        <div className="flex flex-wrap justify-around gap-2">
           <PlanToCalendar plan={selectedPlan} />
           <Button onClick={handleDeletePlan} variant="destructive" size="sm">
             <Ban className="h-4 w-4 mr-2" /> Delete Selected Plan

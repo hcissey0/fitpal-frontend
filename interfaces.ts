@@ -69,6 +69,7 @@ export interface FitnessPlan {
   end_date: string;
   workout_added_to_calendar: boolean;
   nutrition_added_to_calendar: boolean;
+  google_calendar_id: string | null;
   goal_at_creation: string;
   is_active: boolean;
   ai_prompt_text: string;
@@ -83,6 +84,7 @@ export interface WorkoutDay {
   plan: number;
   day_of_week: number;
   title: string;
+  google_calendar_event_id: string | null;
   description: string;
   is_rest_day: boolean;
   exercises: Exercise[];
@@ -124,6 +126,7 @@ export interface Meal {
   carbs_grams: number;
   fats_grams: number;
   portion_size: string;
+  google_calendar_event_id: string | null;
 }
 
 export interface WorkoutTracking {

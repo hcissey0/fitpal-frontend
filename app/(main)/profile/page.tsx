@@ -68,6 +68,12 @@ export default function ProfilePage() {
   const [profileData, setProfileData] = useState<Partial<Profile>>({});
   const [onboardingOpen, setOnboardingOpen] = useState(false);
   const originalProfileData = useMemo(() => user?.profile, [user])
+  const originalUserDetails = useMemo(() => ({
+    first_name: user?.first_name || '',
+    last_name: user?.last_name || '',
+    username: user?.username || '',
+    email: user?.email || '',
+  }), [user])
   const { refresh } = useData();
 
   useEffect(() => {
@@ -777,8 +783,13 @@ export default function ProfilePage() {
               </DialogClose>
               <Button
                 onClick={async () => {
-                  await deleteMyAccount();
-                  toast.success("Account deleted successfully");
+                  try {
+
+                    await deleteMyAccount();
+                    toast.success("Account deleted successfully");
+                  } catch (error) {
+                    // handleApiError(error, "Failed to delete account");
+                  }
                 }}
                 variant={"destructive"}
                 className="bg-red-500 hover:bg-red-900 text-foreground"
@@ -792,7 +803,7 @@ export default function ProfilePage() {
 
         <Button
           onClick={handleSave}
-          disabled={isLoading || _.isEqual(originalProfileData, profileData)}
+          disabled={isLoading || _.isEqual(originalProfileData, profileData) && _.isEqual(originalUserDetails, userDetails)}
           className="cyber-button text-foreground min-w-40 self-end"
         >
           {isLoading ? (

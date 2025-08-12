@@ -61,7 +61,7 @@ export function ExerciseCard({
           </h4>
           {!trackedExercise && (
             <>
-              <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center space-x-4 text-sm text-muted-foreground">
                 <span>{exercise.sets} sets</span>
                 <span>{exercise.reps} reps</span>
                 <span className="flex items-center space-x-1">

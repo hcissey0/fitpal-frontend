@@ -179,6 +179,16 @@ export const addPlanToGoogleCalendar = async (plan_id: number, type: string = 'a
     return res.data;
 }
 
+export const removePlanFromGoogleCalendar = async (plan_id: number, type='all'): Promise<{message: string, success_count: number, failure_count?: number}> => {
+  const res = await api.delete<{message: string, success_count: number, failure_count?: number}>('/users/me/delete-plan-from-calendar/', { data: { plan_id, type } });
+  return res.data;
+}
+
+export const deleteFitPalCalendar = async (): Promise<boolean> => {
+  await api.delete('/users/me/delete-fitpal-calendar/');
+  return true;
+}
+
 export const loginWithGoogle = async (
   accessToken: string
 ): Promise<{ token: string; user: User }> => {
